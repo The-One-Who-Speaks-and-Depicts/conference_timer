@@ -2,11 +2,17 @@
 <!-- комментарий -->
 <head>
 <script type="text/javascript">
+  
   var list = ["my_timer", "my_timer_1"]
   
+  const timer = function(item) {
+    this.my_timer = document.getElementById(item);
+    console.log("Timer initiated!")
+  }
   
   function init() {
   let list_of_timers = list;
+  let new_timer = new timer(list_of_timers[0])
   list_of_timers.forEach(function(item, i, list_of_timers) {
     let my_timer = document.getElementById(item);
     let time = my_timer.innerHTML;
