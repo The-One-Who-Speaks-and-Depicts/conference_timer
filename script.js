@@ -9,6 +9,6 @@
 }    
   $("#addingButton").click(function() {
       var Conf = new conf($("#name").val(), $("#date").val(), $("#stat").val(), $("#req").val());
-      $('#confs tr:last').after("<tr><td>" + Conf.name + "</td><td>" + Conf.date + "</td><td>" + Conf.statusExe + "</td><td>" + Conf.req + "</td></tr>");
+      $('#confs tr:last').after("<tr><td>" + Conf.name + "</td><td>" + Conf.date + "</td><td>" + Conf.statusExe + "</td><td>" + Conf.req + "</td><td>" + moment.utc(moment().diff(new Date(Conf.date))).format("YY:MM:DD:HH:mm:ss") + "</td></tr>");
   });
   };
