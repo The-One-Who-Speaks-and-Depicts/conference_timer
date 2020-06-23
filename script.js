@@ -15,24 +15,32 @@
   function countdown() {
      var timers = document.getElementsByClassName("diff");
         for (var i = 0; i < timers.length; i++) {
+            timers[i].innerText = "";
             let secs = Math.floor(moment.utc(new Date($(timers[i]).attr('title'))).diff(moment.utc(new Date()))/1000);
             if (secs > 0) {                
                 if (secs > 60) {
                     let mins = Math.floor(secs/60);
+                    if (mins > 60) {
+                        let hours = Math.floor(mins/60);
+                        timers[i].innerText += hours + " hours, ";                        
+                    }
+                    console.log(mins)
+                    mins = mins % 60;
+                    console.log(mins)                    
                     if (secs % 60 == 0) {                        
-                        timers[i].innerText = mins + " minutes, " + 0 + " seconds";
+                        timers[i].innerText += mins + " minutes, " + 0 + " seconds";
                     }
                     else {
-                        timers[i].innerText = Math.floor(secs/60) + " minutes, " + secs % 60 + " seconds";
-                    }
+                        timers[i].innerText += mins + " minutes, " + secs % 60 + " seconds";
+                    }                   
                 }
                 else {
-                    timers[i].innerText = secs + " seconds";
+                    timers[i].innerText += secs + " seconds";
                 }
                     
             }
             else {
-                timers[i].innerText = "Time have run out!";
+                timers[i].innerText += "Time have run out!";
             }
             
         }
