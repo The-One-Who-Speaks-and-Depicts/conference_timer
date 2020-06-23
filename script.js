@@ -15,7 +15,7 @@
   function countdown() {
      var timers = document.getElementsByClassName("diff");
         for (var i = 0; i < timers.length; i++) {
-            timers[i].innerText =  moment.utc(moment().diff(new Date($(timers[i]).attr('title')))).format("YY:MM:DD:HH:mm:ss");
+            timers[i].innerText =  Math.floor(moment.utc(new Date($(timers[i]).attr('title'))).diff(moment.utc(new Date()))/1000);
         }
         
     };
