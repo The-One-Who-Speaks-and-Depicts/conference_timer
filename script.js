@@ -22,11 +22,14 @@
                     let mins = Math.floor(secs/60);
                     if (mins > 60) {
                         let hours = Math.floor(mins/60);
-                        timers[i].innerText += hours + " hours, ";                        
+                        if (hours > 24) {
+                            let days = Math.floor(hours/24);                            
+                            timers[i].innerText += days + "days, ";
+                            hours = hours % 24;
+                        }
+                        timers[i].innerText += hours + " hours, ";
                     }
-                    console.log(mins)
-                    mins = mins % 60;
-                    console.log(mins)                    
+                    mins = mins % 60;                  
                     if (secs % 60 == 0) {                        
                         timers[i].innerText += mins + " minutes, " + 0 + " seconds";
                     }
