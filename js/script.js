@@ -3,15 +3,16 @@
     
     
       
- var conf = function(_name, _date, _statusExe, _req) {
+ var conf = function(_name, _desc, _date, _statusExe, _req) {
     this.name = _name;
+    this.desc = _desc;
     this.date = _date;
     this.statusExe = _statusExe;
     this.req = _req;
 }    
   $("#addingButton").click(function() {
-      var Conf = new conf($("#name").val(), $("#date").val(), $("#stat").val(), $("#req").val());
-      $('#confs tr:last').after("<tr><td>" + Conf.name + "</td><td>" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td>" + Conf.statusExe + "</td><td>" + Conf.req + "</td><td title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
+      var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), $("#stat").val(), $("#req").val());
+      $('#confs tr:last').after("<tr><td>" + Conf.name + "</td><td>" + Conf.desc + "</td><td>" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td>" + Conf.statusExe + "</td><td>" + Conf.req + "</td><td title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
   });
 
   function countdown() {
