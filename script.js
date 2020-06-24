@@ -1,5 +1,7 @@
 
   window.onload = function() {
+    
+    
       
  var conf = function(_name, _date, _statusExe, _req) {
     this.name = _name;
@@ -9,7 +11,7 @@
 }    
   $("#addingButton").click(function() {
       var Conf = new conf($("#name").val(), $("#date").val(), $("#stat").val(), $("#req").val());
-      $('#confs tr:last').after("<tr><td>" + Conf.name + "</td><td>" + Conf.date + "</td><td>" + Conf.statusExe + "</td><td>" + Conf.req + "</td><td title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
+      $('#confs tr:last').after("<tr><td>" + Conf.name + "</td><td>" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td>" + Conf.statusExe + "</td><td>" + Conf.req + "</td><td title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
   });
 
   function countdown() {
@@ -24,26 +26,26 @@
                         let hours = Math.floor(mins/60);
                         if (hours > 24) {
                             let days = Math.floor(hours/24);                            
-                            timers[i].innerText += days + "days, ";
+                            timers[i].innerText += days + " days,";
                             hours = hours % 24;
                         }
-                        timers[i].innerText += hours + " hours, ";
+                        timers[i].innerText += " " + hours + " hours, ";
                     }
                     mins = mins % 60;                  
                     if (secs % 60 == 0) {                        
-                        timers[i].innerText += mins + " minutes, " + 0 + " seconds";
+                        timers[i].innerText += " " + mins + " minutes, " + 0 + " seconds";
                     }
                     else {
-                        timers[i].innerText += mins + " minutes, " + secs % 60 + " seconds";
+                        timers[i].innerText += " " + mins + " minutes, " + secs % 60 + " seconds";
                     }                   
                 }
                 else {
-                    timers[i].innerText += secs + " seconds";
+                    timers[i].innerText += " " + secs + " seconds";
                 }
                     
             }
             else {
-                timers[i].innerText += "Time have run out!";
+                timers[i].innerText += "Time have run out!"; // option for automatical deletion
             }
             
         }
