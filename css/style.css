@@ -8,3 +8,38 @@ textarea {
     resize:none;
     width:300px;
 }
+
+table {
+    table-layout: fixed;
+}
+td {
+    word-wrap:break-word;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+}
+
+
+#nameText{
+    width:200px;
+    max-width:300px;
+}
+
+#descText {
+    width:300px;
+    max-width:350px;
+}
+
+#dateText {
+    width:150px;
+    max-width:200px;
+}
+
+#dateLeft {
+    width:300px;
+    max-width:350px;
+}
+
+#status {
+    width:100px;
+    max-width:150px;
+}

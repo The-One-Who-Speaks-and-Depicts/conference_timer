@@ -18,7 +18,7 @@ textarea.addEventListener('keyup', function(){
 }    
   $("#addingButton").click(function() {
       var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), $("#stat").val(), $("#req").val());
-      $('#confs tr:last').after("<tr><td>" + Conf.name + "</td><td>" + Conf.desc + "</td><td>" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td>" + Conf.statusExe + "</td><td>" + Conf.req + "</td><td title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
+      $('#confs tr:last').after("<tr><td id=\"nameText\">" + Conf.name + "</td><td id=\"descText\">" + Conf.desc + "</td><td id=\"dateText\">" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td id=\"status\">" + Conf.statusExe + "</td><td id=\"status\">" + Conf.req + "</td><td id=\"dateLeft\" title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
   });
 
   function countdown() {
