@@ -1,7 +1,13 @@
 
   window.onload = function() {
     
-    
+    var textarea = document.querySelector('textarea');
+
+textarea.addEventListener('keyup', function(){
+  if(this.scrollTop > 0){
+    this.style.height = this.scrollHeight + "px";
+  }
+});
       
  var conf = function(_name, _desc, _date, _statusExe, _req) {
     this.name = _name;

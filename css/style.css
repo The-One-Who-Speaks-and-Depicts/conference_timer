@@ -1,0 +1,10 @@
+aside {
+    width:400px;
+    float:left;
+}
+
+textarea {
+    overflow:hidden;
+    resize:none;
+    width:300px;
+}
