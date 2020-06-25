@@ -1,5 +1,14 @@
 
   window.onload = function() {
+      
+    $('#stat').change(function() {        
+        if ($('#stat').val() == "пользовательский статус") {
+            document.getElementById("stat_user").style.display = "inline";
+        }
+        else if ((document.getElementById("stat_user").style.display == "inline") && ($('#stat').val() != "пользовательский статус")) {
+            document.getElementById("stat_user").style.display = "none";
+        }
+    });
     
     var textarea = document.querySelector('textarea');
 
@@ -17,7 +26,7 @@ textarea.addEventListener('keyup', function(){
     this.req = _req;
 }    
   $("#addingButton").click(function() {
-      var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), $("#stat").val(), $("#req").val());
+      var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), $("#stat").val(), $("#req_num").val() + " " + $("#req_opt").val());
       $('#confs tr:last').after("<tr><td id=\"nameText\">" + Conf.name + "</td><td id=\"descText\">" + Conf.desc + "</td><td id=\"dateText\">" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td id=\"status\">" + Conf.statusExe + "</td><td id=\"status\">" + Conf.req + "</td><td id=\"dateLeft\" title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
   });
 
