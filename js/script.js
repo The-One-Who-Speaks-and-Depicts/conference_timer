@@ -30,8 +30,15 @@ textarea.addEventListener('keyup', function(){
           alert('Заполните все поля!');
       }
       else {
-        var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), $("#stat").val(), $("#req_num").val() + " " + $("#req_opt").val());
-        $('#confs tr:last').after("<tr><td id=\"nameText\">" + Conf.name + "</td><td id=\"descText\">" + Conf.desc + "</td><td id=\"dateText\">" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td id=\"status\">" + Conf.statusExe + "</td><td id=\"status\">" + Conf.req + "</td><td id=\"dateLeft\" title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
+          var statusConf = "";
+          if ($('#stat').val() == "пользовательский статус") {
+              statusConf = $('#stat_user').val();
+          }
+          else {
+              statusConf = $('#stat').val();
+          }
+          var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), statusConf, $("#req_num").val() + " " + $("#req_opt").val());
+          $('#confs tr:last').after("<tr><td id=\"nameText\">" + Conf.name + "</td><td id=\"descText\">" + Conf.desc + "</td><td id=\"dateText\">" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td id=\"status\">" + Conf.statusExe + "</td><td id=\"status\">" + Conf.req + "</td><td id=\"dateLeft\" title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
       }
     });
 
