@@ -26,9 +26,14 @@ textarea.addEventListener('keyup', function(){
     this.req = _req;
 }    
   $("#addingButton").click(function() {
-      var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), $("#stat").val(), $("#req_num").val() + " " + $("#req_opt").val());
-      $('#confs tr:last').after("<tr><td id=\"nameText\">" + Conf.name + "</td><td id=\"descText\">" + Conf.desc + "</td><td id=\"dateText\">" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td id=\"status\">" + Conf.statusExe + "</td><td id=\"status\">" + Conf.req + "</td><td id=\"dateLeft\" title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
-  });
+      if ($("#name").val() == "" || $("#desc").val() == "" || $("#req_num").val() == "" || ($('#stat').val() == "пользовательский статус" && $('#stat_user').val() == "") || (moment($('#date').val()).format('YYYY/MM/DD HH:mm:ss') == "Invalid date")) {
+          alert('Заполните все поля!');
+      }
+      else {
+        var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), $("#stat").val(), $("#req_num").val() + " " + $("#req_opt").val());
+        $('#confs tr:last').after("<tr><td id=\"nameText\">" + Conf.name + "</td><td id=\"descText\">" + Conf.desc + "</td><td id=\"dateText\">" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td id=\"status\">" + Conf.statusExe + "</td><td id=\"status\">" + Conf.req + "</td><td id=\"dateLeft\" title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
+      }
+    });
 
   function countdown() {
      var timers = document.getElementsByClassName("diff");
