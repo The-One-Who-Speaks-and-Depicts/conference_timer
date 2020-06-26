@@ -43,3 +43,7 @@ td {
     width:100px;
     max-width:150px;
 }
+
+.identificator {
+    display:none;
+}
