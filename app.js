@@ -13,7 +13,7 @@ app.get('/api/confs', function(req, res) {
   res.send(confs)
 })
 // получение одного пользователя по id
-app.get('/api/users/:id', function(req, res) {
+app.get('/api/confs/:id', function(req, res) {
   var id = req.params.id; // получаем id
   var content = fs.readFileSync('confs.json', 'utf8');
   var confs = JSON.parse(content);
@@ -33,7 +33,7 @@ app.get('/api/users/:id', function(req, res) {
   }
 });
 // получение отправленных данных
-app.post('/api/users', jsonParser, function(req, res) {
+app.post('/api/confs', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400);
   
   var confName = req.body.name;
@@ -63,7 +63,7 @@ app.post('/api/users', jsonParser, function(req, res) {
   res.send(conf)
 })
 // удаление пользователя по id
-app.delete('/api/users/:id', function(req, res) {
+app.delete('/api/confs/:id', function(req, res) {
   var id = req.params.id
   var data = fs.readFileSync('confs.json', 'utf8')
   var confs = JSON.parse(data)
@@ -87,34 +87,40 @@ app.delete('/api/users/:id', function(req, res) {
   }
 })
 // изменение пользователя
-app.put('/api/users', jsonParser, function(req, res) {
+app.put('/api/confs', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
 
-  var userId = req.body.id
-  var userName = req.body.name
-  var userAge = req.body.age
+  var confId = req.body.id;
+  var confName = req.body.name;
+  var confDesc = req.body.desc;
+  var confDate = req.body.date;
+  var confStat = req.body.stat;
+  var confReq = req.body.req_size;
 
-  var data = fs.readFileSync('users.json', 'utf8')
-  var users = JSON.parse(data)
-  var user
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].id == userId) {
-      user = users[i]
-      break
+  var data = fs.readFileSync('confs.json', 'utf8');
+  var confs = JSON.parse(data);
+  var conf;
+  for (var i = 0; i < confs.length; i++) {
+    if (confs[i].id == confId) {
+      conf = confs[i];
+      break;
     }
   }
   // изменяем данные у пользователя
-  if (user) {
-    user.age = userAge
-    user.name = userName
-    var data = JSON.stringify(users)
-    fs.writeFileSync('users.json', data)
-    res.send(user)
+  if (conf) {    
+    conf.name = confName;
+    conf.desc = confDesc;
+    conf.date = confDate;
+    conf.stat = confStat;
+    conf.req_size = confReq;
+    var data = JSON.stringify(confs);
+    fs.writeFileSync('confs.json', data);
+    res.send(conf);
   } else {
-    res.status(404).send(user)
+    res.status(404).send(conf);
   }
 })
 
 app.listen(3000, function() {
-  console.log('Сервер ожидает подключения...')
+  console.log('Сервер ожидает подключения...');
 })
