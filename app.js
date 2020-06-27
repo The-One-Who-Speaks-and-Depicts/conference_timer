@@ -21,8 +21,8 @@ app.get('/api/confs/:id', function(req, res) {
   // находим в массиве пользователя по id
   for (var i = 0; i < confs.length; i++) {
     if (confs[i].id == id) {
-      conf = confs[i];
-      break;
+      conf = confs[i]
+      break
     }
   }
   // отправляем пользователя
@@ -41,7 +41,7 @@ app.post('/api/confs', jsonParser, function(req, res) {
   var confDate = req.body.date;
   var confStat = req.body.stat;
   var confReq = req.body.req_size;
-  var user = { name: confName, desc: confDesc, date: confDate, stat: confStat, req_size: confReq }
+  var conf = { name: confName, desc: confDesc, date: confDate, stat: confStat, req_size: confReq }
 
   var data = fs.readFileSync('confs.json', 'utf8');
   var confs = JSON.parse(data)

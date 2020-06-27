@@ -81,8 +81,8 @@ textarea.addEventListener('keyup', function(){
     };
 
 setInterval(countdown, 1000);
-  };
-*/
+  };*/
+
 
      function GetConfs() {
         $.ajax({
@@ -176,8 +176,8 @@ setInterval(countdown, 1000);
         })
       }
       // создание строки для таблицы
-      var row = function(user) {
-        return "<tr data-rowid='" + conf.id + "'><td>" + conf.id + '</td>' + '<td>' + conf.name + '</td> <td>' + conf.desc + '</td>' + '</td> <td>' + conf.date + '</td>' + '</td> <td>' + conf.stat + '</td>' + '</td> <td>' + conf.req_size + '</td>' + '</td> <td title=\"' + Conf.date + '\" class=\"diff\"></td>' +"<td><a class='editLink' data-id='" + conf.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + conf.id + "'>Удалить</a></td></tr>"
+      var row = function(conf) {
+        return "<tr data-rowid='" + conf.id + "'><td>" + conf.id + '</td>' + '<td>' + conf.name + '</td> <td>' + conf.desc + '</td>' + '</td> <td>' + conf.date + '</td>' + '</td> <td>' + conf.stat + '</td>' + '</td> <td>' + conf.req_size + '</td>' + '</td> <td title=\"' + conf.date + '\" class=\"diff\"></td>' +"<td><a class='editLink' data-id='" + conf.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + conf.id + "'>Удалить</a></td></tr>"
       }
       // сброс значений формы
       $('#reset').click(function(e) {
