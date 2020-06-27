@@ -1,4 +1,4 @@
-
+/*
   window.onload = function() {
       
     $('#stat').change(function() {        
@@ -82,3 +82,126 @@ textarea.addEventListener('keyup', function(){
 
 setInterval(countdown, 1000);
   };
+*/
+
+     function GetUsers() {
+        $.ajax({
+          url: '/api/confs',
+          type: 'GET',
+          contentType: 'application/json',
+          success: function(confs) {
+            var rows = '';
+            $.each(confs, function(index, conf) {
+              // добавляем полученные элементы в таблицу
+              rows += row(conf);
+            })
+            $('table tbody').append(confs);
+          }
+        })
+      }
+      // Получение одного пользователя
+      function GetUser(id) {
+        $.ajax({
+          url: '/api/confs/' + id,
+          type: 'GET',
+          contentType: 'application/json',
+          success: function(conf) {
+            var form = document.forms['confsForm']
+            form.elements['id'].value = conf.id;
+            form.elements['name'].value = conf.name;
+            form.elements['desc'].value = conf.desc;
+            form.elements['date'].value = conf.date;
+            form.elements['stat'].value = conf.stat;
+            form.elements['req_size'].value = conf.req_size;
+          }
+        })
+      }
+      // Добавление пользователя
+      function CreateUser(userName, userAge) {
+        $.ajax({
+          url: 'api/users',
+          contentType: 'application/json',
+          method: 'POST',
+          data: JSON.stringify({
+            name: confName,
+            desc: confDesc,
+            date: confDate,
+            stat: confStat,
+            req_size: confReq
+          }),
+          success: function(conf) {
+            reset()
+            $('table tbody').append(row(conf))
+          }
+        })
+      }
+      // Изменение пользователя
+      function EditUser(userId, userName, userAge) {
+        $.ajax({
+          url: 'api/users',
+          contentType: 'application/json',
+          method: 'PUT',
+          data: JSON.stringify({
+            id: userId,
+            name: userName,
+            age: userAge
+          }),
+          success: function(user) {
+            reset()
+            $("tr[data-rowid='" + user.id + "']").replaceWith(row(user))
+          }
+        })
+      }
+
+      // сброс формы
+      function reset() {
+        var form = document.forms['userForm']
+        form.reset()
+        form.elements['id'].value = 0
+      }
+
+      // Удаление пользователя
+      function DeleteUser(id) {
+        $.ajax({
+          url: 'api/users/' + id,
+          contentType: 'application/json',
+          method: 'DELETE',
+          success: function(user) {
+            console.log(user)
+            $("tr[data-rowid='" + user.id + "']").remove()
+          }
+        })
+      }
+      // создание строки для таблицы
+      var row = function(user) {
+        return "<tr data-rowid='" + user.id + "'><td>" + user.id + '</td>' + '<td>' + user.name + '</td> <td>' + user.age + '</td>' + "<td><a class='editLink' data-id='" + user.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + user.id + "'>Удалить</a></td></tr>"
+      }
+      // сброс значений формы
+      $('#reset').click(function(e) {
+        e.preventDefault()
+        reset()
+      })
+
+      // отправка формы
+      $('form').submit(function(e) {
+        e.preventDefault()
+        var id = this.elements['id'].value
+        var name = this.elements['name'].value
+        var age = this.elements['age'].value
+        if (id == 0) CreateUser(name, age)
+        else EditUser(id, name, age)
+      })
+
+      // нажимаем на ссылку Изменить
+      $('body').on('click', '.editLink', function() {
+        var id = $(this).data('id')
+        GetUser(id)
+      })
+      // нажимаем на ссылку Удалить
+      $('body').on('click', '.removeLink', function() {
+        var id = $(this).data('id')
+        DeleteUser(id)
+      })
+
+      // загрузка пользователей
+      GetUsers()
