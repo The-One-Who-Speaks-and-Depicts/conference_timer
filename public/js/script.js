@@ -99,7 +99,7 @@ setInterval(countdown, 1000);
           }
         })
       }
-      // Получение одного пользователя
+      // Получение одной конференции
       function GetConf(id) {
         $.ajax({
           url: '/api/confs/' + id,
@@ -116,7 +116,7 @@ setInterval(countdown, 1000);
           }
         })
       }
-      // Добавление пользователя
+      // Добавление конференции
       function CreateConf(confName, confDesc, confDate, confStat, confReq) {
         $.ajax({
           url: 'api/users',
@@ -135,7 +135,7 @@ setInterval(countdown, 1000);
           }
         })
       }
-      // Изменение пользователя
+      // Изменение конференции
       function EditUser(confId, confName, confDesc, confDate, confStat, confReq) {
         $.ajax({
           url: 'api/confs',
@@ -163,7 +163,7 @@ setInterval(countdown, 1000);
         form.elements['id'].value = 0;
       }
 
-      // Удаление пользователя
+      // Удаление конференций
       function DeleteConf(id) {
         $.ajax({
           url: 'api/users/' + id,
@@ -177,7 +177,7 @@ setInterval(countdown, 1000);
       }
       // создание строки для таблицы
       var row = function(user) {
-        return "<tr data-rowid='" + user.id + "'><td>" + user.id + '</td>' + '<td>' + user.name + '</td> <td>' + user.age + '</td>' + "<td><a class='editLink' data-id='" + user.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + user.id + "'>Удалить</a></td></tr>"
+        return "<tr data-rowid='" + conf.id + "'><td>" + conf.id + '</td>' + '<td>' + conf.name + '</td> <td>' + conf.desc + '</td>' + '</td> <td>' + conf.date + '</td>' + '</td> <td>' + conf.stat + '</td>' + '</td> <td>' + conf.req_size + '</td>' + '</td> <td title=\"' + Conf.date + '\" class=\"diff\"></td>' +"<td><a class='editLink' data-id='" + conf.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + conf.id + "'>Удалить</a></td></tr>"
       }
       // сброс значений формы
       $('#reset').click(function(e) {
@@ -190,21 +190,24 @@ setInterval(countdown, 1000);
         e.preventDefault()
         var id = this.elements['id'].value
         var name = this.elements['name'].value
-        var age = this.elements['age'].value
-        if (id == 0) CreateUser(name, age)
-        else EditUser(id, name, age)
+        var desc = this.elements['desc'].value
+        var date = this.elements['date'].value
+        var stat = this.elements['stat'].value
+        var req_size = this.elements['req_size'].value
+        if (id == 0) CreateUser(name, desc, date, stat, req_size)
+        else EditUser(id, name, desc, date, stat, req_size)
       })
 
       // нажимаем на ссылку Изменить
       $('body').on('click', '.editLink', function() {
         var id = $(this).data('id')
-        GetUser(id)
+        GetСonf(id)
       })
       // нажимаем на ссылку Удалить
       $('body').on('click', '.removeLink', function() {
         var id = $(this).data('id')
-        DeleteUser(id)
+        DeleteConf(id)
       })
 
-      // загрузка пользователей
-      GetUsers()
+      // загрузка конференций
+      GetConfs()
