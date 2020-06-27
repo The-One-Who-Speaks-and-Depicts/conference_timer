@@ -4,14 +4,15 @@
         "name": "Zvegincev",
         "desc": "Zvegincev readings"
         "date": "2020-06-30T17:59:00",
-        "status": "WIP",
-        "req": "1 page"
+        "stat": "WIP",
+        "req_size": "1 page"
     },
-    "id" : 2,
+    {
+        "id" : 2,
         "name": "Zvegincev",
         "desc": "Zvegincev readings"
         "date": "2020-06-30T17:59:00",
-        "status": "WIP",
-        "req": "1 page"
+        "stat": "WIP",
+        "req_size": "1 page"
     }
 ]
