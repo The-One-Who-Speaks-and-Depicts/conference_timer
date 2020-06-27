@@ -1,5 +1,9 @@
 <!DOCTYPE HTML>
 <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Список конференций</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
@@ -7,13 +11,47 @@
 </head>
 
 <body>
+<h2>Список конференций</h2>
 <aside>
-<span>Название:</span><br>
+<form name="userForm">
+      <input type="hidden" name="id" value="0" />
+      <div class="form-group">
+        <label for="name">Имя:</label>
+        <input class="form-control" name="name" />
+      </div>
+      <div class="form-group">
+        <label for="desc">Описание:</label>
+        <input class="form-control" name="desc" />
+      </div>
+      <div class="form-group">
+        <label for="date">Дата:</label>
+        <input class="form-control" name="date" type="datetime-local" />
+      </div>
+      <div class="form-group">
+        <label for="stat">Статус:</label>
+        <input class="form-control" name="stat" />
+      </div>
+      <div class="form-group">
+        <label for="req_size">Описание:</label>
+        <input class="form-control" name="req_size" />
+      </div>
+      <div class="panel-body">
+        <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
+        <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+      </div>
+</form>
+</aside>
+
+<div>
+<table id="confs">
+<tr><td class="identificator">Id</td><td id="nameText">Название</td><td id="descText">Описание</td><td id="dateText">Дата</td><td id="status">Статус</td><td id="status">Требования</td><td id="dateText">Осталось:</td></tr>
+</table>
+</div>
+
+<!-- <span>Название:</span><br>
 <textarea id="name"></textarea><br><br>
 <span>Информация:</span><br>
 <textarea id="desc"></textarea><br><br>
-<span>Дата:</span><br>
-<input id="date" type="datetime-local"><br><br>
 <span>Статус:</span><br>
 <select id="stat">
     <option>не принято решение об участии</option>
@@ -51,12 +89,7 @@
     <option>знаков (с пробелами)</option>
     <option>знаков (без пробелов)</option>    
 </select><br><br>
-<button id="addingButton">Добавить конференцию</button><br><br>
-</aside>
-<div>
-<table id="confs">
-<tr><td class="identificator">Id</td><td id="nameText">Название</td><td id="descText">Описание</td><td id="dateText">Дата</td><td id="status">Статус</td><td id="status">Требования</td><td id="dateText">Осталось:</td></tr>
-</table>
-</div>
+<button id="addingButton">Добавить конференцию</button><br><br> -->
+
 
 </body>
