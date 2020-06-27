@@ -84,7 +84,7 @@ setInterval(countdown, 1000);
   };
 */
 
-     function GetUsers() {
+     function GetConfs() {
         $.ajax({
           url: '/api/confs',
           type: 'GET',
@@ -100,7 +100,7 @@ setInterval(countdown, 1000);
         })
       }
       // Получение одного пользователя
-      function GetUser(id) {
+      function GetConf(id) {
         $.ajax({
           url: '/api/confs/' + id,
           type: 'GET',
@@ -117,7 +117,7 @@ setInterval(countdown, 1000);
         })
       }
       // Добавление пользователя
-      function CreateUser(userName, userAge) {
+      function CreateConf(confName, confDesc, confDate, confStat, confReq) {
         $.ajax({
           url: 'api/users',
           contentType: 'application/json',
@@ -130,45 +130,48 @@ setInterval(countdown, 1000);
             req_size: confReq
           }),
           success: function(conf) {
-            reset()
-            $('table tbody').append(row(conf))
+            reset();
+            $('table tbody').append(row(conf));
           }
         })
       }
       // Изменение пользователя
-      function EditUser(userId, userName, userAge) {
+      function EditUser(confId, confName, confDesc, confDate, confStat, confReq) {
         $.ajax({
-          url: 'api/users',
+          url: 'api/confs',
           contentType: 'application/json',
           method: 'PUT',
           data: JSON.stringify({
-            id: userId,
-            name: userName,
-            age: userAge
+            id: confId,
+            name: confName,
+            desc: confDesc,
+            date: confDate,
+            stat: confStat,
+            req_size: confReq
           }),
-          success: function(user) {
-            reset()
-            $("tr[data-rowid='" + user.id + "']").replaceWith(row(user))
+          success: function(conf) {
+            reset();
+            $("tr[data-rowid='" + conf.id + "']").replaceWith(row(conf));
           }
         })
       }
 
       // сброс формы
       function reset() {
-        var form = document.forms['userForm']
-        form.reset()
-        form.elements['id'].value = 0
+        var form = document.forms['confsForm'];
+        form.reset();
+        form.elements['id'].value = 0;
       }
 
       // Удаление пользователя
-      function DeleteUser(id) {
+      function DeleteConf(id) {
         $.ajax({
           url: 'api/users/' + id,
           contentType: 'application/json',
           method: 'DELETE',
-          success: function(user) {
-            console.log(user)
-            $("tr[data-rowid='" + user.id + "']").remove()
+          success: function(conf) {
+            console.log(conf);
+            $("tr[data-rowid='" + conf.id + "']").remove();
           }
         })
       }
