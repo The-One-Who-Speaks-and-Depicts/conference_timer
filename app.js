@@ -65,23 +65,23 @@ app.post('/api/users', jsonParser, function(req, res) {
 // удаление пользователя по id
 app.delete('/api/users/:id', function(req, res) {
   var id = req.params.id
-  var data = fs.readFileSync('users.json', 'utf8')
-  var users = JSON.parse(data)
+  var data = fs.readFileSync('confs.json', 'utf8')
+  var confs = JSON.parse(data)
   var index = -1
   // находим индекс пользователя в массиве
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].id == id) {
+  for (var i = 0; i < confs.length; i++) {
+    if (confs[i].id == id) {
       index = i
       break
     }
   }
   if (index > -1) {
     // удаляем пользователя из массива по индексу
-    var user = users.splice(index, 1)[0]
-    var data = JSON.stringify(users)
-    fs.writeFileSync('users.json', data)
+    var conf = confs.splice(index, 1)[0]
+    var data = JSON.stringify(confs)
+    fs.writeFileSync('confs.json', data)
     // отправляем удаленного пользователя
-    res.send(user)
+    res.send(conf)
   } else {
     res.status(404).send()
   }
