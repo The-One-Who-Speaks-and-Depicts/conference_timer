@@ -40,7 +40,7 @@ textarea.addEventListener('keyup', function(){
           var Conf = new conf($("#name").val(),  $("#desc").val(), $("#date").val(), statusConf, $("#req_num").val() + " " + $("#req_opt").val());
           $('#confs tr:last').after("<tr><td class=\"identificator\"></td><td id=\"nameText\">" + Conf.name + "</td><td id=\"descText\">" + Conf.desc + "</td><td id=\"dateText\">" + moment(Conf.date).format('YYYY/MM/DD HH:mm:ss') + "</td><td id=\"status\">" + Conf.statusExe + "</td><td id=\"status\">" + Conf.req + "</td><td id=\"dateLeft\" title=\"" + Conf.date + "\" class=\"diff\"></td></tr>");
       }
-    });
+    });*/
 
   function countdown() {
      var timers = document.getElementsByClassName("diff");
@@ -81,7 +81,6 @@ textarea.addEventListener('keyup', function(){
     };
 
 setInterval(countdown, 1000);
-  };*/
 
 
      function GetConfs() {
@@ -177,7 +176,7 @@ setInterval(countdown, 1000);
       }
       // создание строки для таблицы
       var row = function(conf) {
-        return "<tr data-rowid='" + conf.id + "'><td>" + conf.id + '</td>' + '<td>' + conf.name + '</td> <td>' + conf.desc + '</td>' + '</td> <td>' + conf.date + '</td>' + '</td> <td>' + conf.stat + '</td>' + '</td> <td>' + conf.req_size + '</td>' + '</td> <td title=\"' + conf.date + '\" class=\"diff\"></td>' +"<td><a class='editLink' data-id='" + conf.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + conf.id + "'>Удалить</a></td></tr>"
+        return "<tr data-rowid='" + conf.id + "'><td>" + conf.id + '</td>' + '<td>' + conf.name + '</td> <td>' + conf.desc + '</td>' + '</td> <td>' + moment(conf.date).format('YYYY/MM/DD HH:mm:ss') + '</td>' + '</td> <td>' + conf.stat + '</td>' + '</td> <td>' + conf.req_size + '</td>' + '</td> <td title=\"' + conf.date + '\" class=\"diff\"></td>' +"<td><a class='editLink' data-id='" + conf.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + conf.id + "'>Удалить</a></td></tr>"
       }
       // сброс значений формы
       $('#reset').click(function(e) {
