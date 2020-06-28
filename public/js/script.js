@@ -18,13 +18,7 @@ textarea.addEventListener('keyup', function(){
   }
 });
       
- var conf = function(_name, _desc, _date, _statusExe, _req) {
-    this.name = _name;
-    this.desc = _desc;
-    this.date = _date;
-    this.statusExe = _statusExe;
-    this.req = _req;
-}    
+    
   $("#addingButton").click(function() {
       if ($("#name").val() == "" || $("#desc").val() == "" || $("#req_num").val() == "" || ($('#stat').val() == "пользовательский статус" && $('#stat_user').val() == "") || (moment($('#date').val()).format('YYYY/MM/DD HH:mm:ss') == "Invalid date")) {
           alert('Заполните все поля!');
@@ -83,7 +77,8 @@ textarea.addEventListener('keyup', function(){
 setInterval(countdown, 1000);
 
 
-     function GetConfs() {
+window.onload = function() {
+    function GetConfs() {
         $.ajax({
           url: '/api/confs',
           type: 'GET',
@@ -118,7 +113,7 @@ setInterval(countdown, 1000);
       // Добавление конференции
       function CreateConf(confName, confDesc, confDate, confStat, confReq) {
         $.ajax({
-          url: 'api/users',
+          url: 'api/confs',
           contentType: 'application/json',
           method: 'POST',
           data: JSON.stringify({
@@ -135,7 +130,7 @@ setInterval(countdown, 1000);
         })
       }
       // Изменение конференции
-      function EditUser(confId, confName, confDesc, confDate, confStat, confReq) {
+      function EditConf(confId, confName, confDesc, confDate, confStat, confReq) {
         $.ajax({
           url: 'api/confs',
           contentType: 'application/json',
@@ -165,11 +160,10 @@ setInterval(countdown, 1000);
       // Удаление конференций
       function DeleteConf(id) {
         $.ajax({
-          url: 'api/users/' + id,
+          url: 'api/confs/' + id,
           contentType: 'application/json',
           method: 'DELETE',
           success: function(conf) {
-            console.log(conf);
             $("tr[data-rowid='" + conf.id + "']").remove();
           }
         })
@@ -186,6 +180,7 @@ setInterval(countdown, 1000);
 
       // отправка формы
       $('form').submit(function(e) {
+        console.log("data")
         e.preventDefault()
         var id = this.elements['id'].value
         var name = this.elements['name'].value
@@ -193,14 +188,16 @@ setInterval(countdown, 1000);
         var date = this.elements['date'].value
         var stat = this.elements['stat'].value
         var req_size = this.elements['req_size'].value
-        if (id == 0) CreateUser(name, desc, date, stat, req_size)
-        else EditUser(id, name, desc, date, stat, req_size)
+        if (id == 0) CreateConf(name, desc, date, stat, req_size)
+        else EditConf(id, name, desc, date, stat, req_size)
       })
+      
+      
 
       // нажимаем на ссылку Изменить
       $('body').on('click', '.editLink', function() {
         var id = $(this).data('id')
-        GetСonf(id)
+        GetConf(id)
       })
       // нажимаем на ссылку Удалить
       $('body').on('click', '.removeLink', function() {
@@ -210,3 +207,4 @@ setInterval(countdown, 1000);
 
       // загрузка конференций
       GetConfs()
+};
