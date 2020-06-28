@@ -95,7 +95,7 @@ setInterval(countdown, 1000);
               // добавляем полученные элементы в таблицу
               rows += row(conf);
             })
-            $('table tbody').append(confs);
+            $('table tbody').append(rows);
           }
         })
       }
