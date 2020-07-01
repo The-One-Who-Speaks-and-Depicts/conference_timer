@@ -29,37 +29,18 @@ app.post('/api/confs', (request, response) => {
         response.status(201).send(`Conference added with ID: ${result.insertId}`);
     });
 });
-/*
-app.post('/api/confs', jsonParser, function(req, res) {
-  if (!req.body) return res.sendStatus(400);
-  
-  var confName = req.body.name;
-  var confDesc = req.body.desc;
-  var confDate = req.body.date;
-  var confStat = req.body.stat;
-  var confReq = req.body.req_size;
-  var conf = { name: confName, desc: confDesc, date: confDate, stat: confStat, req_size: confReq }
 
-  var data = fs.readFileSync('confs.json', 'utf8');
-  var confs = JSON.parse(data)
-
-  // находим максимальный id
-  var id = Math.max.apply(
-    Math,
-    confs.map(function(o) {
-      return o.id
-    })
-  )
-  // увеличиваем его на единицу
-  conf.id = id + 1
-  // добавляем пользователя в массив
-  confs.push(conf)
-  var data = JSON.stringify(confs)
-  // перезаписываем файл с новыми данными
-  fs.writeFileSync('confs.json', data)
-  res.send(conf)
-})*/
 // удаление пользователя по id
+app.delete('/api/confs/:id', (request, response) => {
+    const id = request.params.id;
+ 
+    pool.query('DELETE FROM confs WHERE id = ?', [id], (error, result) => {
+        if (error) throw error;
+ 
+        response.send('Conference deleted.');
+    });
+});
+/*
 app.delete('/api/confs/:id', function(req, res) {
   var id = req.params.id
   var data = fs.readFileSync('confs.json', 'utf8')
@@ -82,7 +63,7 @@ app.delete('/api/confs/:id', function(req, res) {
   } else {
     res.status(404).send()
   }
-})
+})*/
 // изменение пользователя
 app.put('/api/confs', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)

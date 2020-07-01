@@ -44,7 +44,7 @@ td {
     max-width:150px;
 }
 
-.identificator {
+.identificator, .conference_identificator {
     display:none;
 }
 

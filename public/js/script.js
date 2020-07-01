@@ -168,10 +168,11 @@ window.onload = function() {
             $("tr[data-rowid='" + conf.id + "']").remove();
           }
         })
+        location.reload(true);
       }
       // создание строки для таблицы
       var row = function(conf) {
-        return "<tr data-rowid='" + conf.id + "'><td>" + conf.id + '</td>' + '<td>' + conf.name + '</td> <td>' + conf.desc + '</td>' + '</td> <td>' + moment(conf.date).format('YYYY/MM/DD HH:mm:ss') + '</td>' + '</td> <td>' + conf.stat + '</td>' + '</td> <td>' + conf.req_size + '</td>' + '</td> <td title=\"' + conf.date + '\" class=\"diff\"></td>' +"<td><a class='editLink' data-id='" + conf.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + conf.id + "'>Удалить</a></td></tr>"
+        return "<tr data-rowid='" + conf.id + "'><td class='conference_identificator'>" + conf.id + '</td>' + '<td>' + conf.name + '</td> <td>' + conf.desc + '</td>' + '</td> <td>' + moment(conf.date).format('YYYY/MM/DD HH:mm:ss') + '</td>' + '</td> <td>' + conf.stat + '</td>' + '</td> <td>' + conf.req_size + '</td>' + '</td> <td title=\"' + conf.date + '\" class=\"diff\"></td>' +"<td><a class='editLink' data-id='" + conf.id + "'>Изменить</a> | " + "<a class='removeLink' data-id='" + conf.id + "'>Удалить</a></td></tr>"
       }
       // сброс значений формы
       $('#reset').click(function(e) {
