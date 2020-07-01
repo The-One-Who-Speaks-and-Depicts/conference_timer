@@ -9,38 +9,12 @@ var jsonParser = bodyParser.json()
 
 app.use(express.static(__dirname + '/public'))
 // получение списка данных
-/*
-app.get('/api/confs', function(req, res) {
-  var content = fs.readFileSync('confs.json', 'utf8')
-  var confs = JSON.parse(content)
-  res.send(confs)
-})*/
 app.get('/api/confs', (request, response) => {
-    pool.query('SELECT * FROM confs', (error, result) => {
+    pool.query('SELECT * FROM confs ORDER BY date', (error, result) => {
         if (error) throw error;
  
         response.send(result);
     });
-});
-// получение одного пользователя по id
-app.get('/api/confs/:id', function(req, res) {
-  var id = req.params.id; // получаем id
-  var content = fs.readFileSync('confs.json', 'utf8');
-  var confs = JSON.parse(content);
-  var conf = null;
-  // находим в массиве пользователя по id
-  for (var i = 0; i < confs.length; i++) {
-    if (confs[i].id == id) {
-      conf = confs[i]
-      break
-    }
-  }
-  // отправляем пользователя
-  if (conf) {
-    res.send(conf);
-  } else {
-    res.status(404).send();
-  }
 });
 // получение отправленных данных
 app.post('/api/confs', jsonParser, function(req, res) {
