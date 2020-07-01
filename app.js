@@ -8,6 +8,7 @@ var app = express()
 var jsonParser = bodyParser.json()
 
 app.use(express.static(__dirname + '/public'))
+
 // получение списка данных
 app.get('/api/confs', (request, response) => {
     pool.query('SELECT * FROM confs ORDER BY date', (error, result) => {
@@ -16,7 +17,19 @@ app.get('/api/confs', (request, response) => {
         response.send(result);
     });
 });
+
+
 // получение отправленных данных
+var bodyParser = require("body-parser");
+app.use(bodyParser.json())
+app.post('/api/confs', (request, response) => {
+    pool.query('INSERT INTO confs SET ?', [request.body], (error, result) => {
+        if (error) throw error;
+ 
+        response.status(201).send(`Conference added with ID: ${result.insertId}`);
+    });
+});
+/*
 app.post('/api/confs', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400);
   
@@ -45,7 +58,7 @@ app.post('/api/confs', jsonParser, function(req, res) {
   // перезаписываем файл с новыми данными
   fs.writeFileSync('confs.json', data)
   res.send(conf)
-})
+})*/
 // удаление пользователя по id
 app.delete('/api/confs/:id', function(req, res) {
   var id = req.params.id

@@ -128,6 +128,7 @@ window.onload = function() {
             $('table tbody').append(row(conf));
           }
         })
+        location.reload(true);
       }
       // Изменение конференции
       function EditConf(confId, confName, confDesc, confDate, confStat, confReq) {
