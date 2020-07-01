@@ -40,31 +40,30 @@ app.delete('/api/confs/:id', (request, response) => {
         response.send('Conference deleted.');
     });
 });
-/*
-app.delete('/api/confs/:id', function(req, res) {
-  var id = req.params.id
-  var data = fs.readFileSync('confs.json', 'utf8')
-  var confs = JSON.parse(data)
-  var index = -1
-  // находим индекс пользователя в массиве
-  for (var i = 0; i < confs.length; i++) {
-    if (confs[i].id == id) {
-      index = i
-      break
-    }
-  }
-  if (index > -1) {
-    // удаляем пользователя из массива по индексу
-    var conf = confs.splice(index, 1)[0]
-    var data = JSON.stringify(confs)
-    fs.writeFileSync('confs.json', data)
-    // отправляем удаленного пользователя
-    res.send(conf)
-  } else {
-    res.status(404).send()
-  }
-})*/
+
+
+//получение пользователя по id
+app.get('/api/confs/:id', (request, response) => {
+    const id = request.params.id;
+ 
+    pool.query('SELECT * FROM confs WHERE id = ?', [id], (error, result) => {
+        if (error) throw error;
+ 
+        response.send(result);
+    });
+});
+
 // изменение пользователя
+app.put('/api/confs/:id', (request, response) => {
+    const id = request.params.id;
+ 
+    pool.query('UPDATE confs SET ? WHERE id = ?', [request.body, id], (error, result) => {
+        if (error) throw error;
+ 
+        response.send('Conference updated successfully.');
+    });
+});
+/*
 app.put('/api/confs', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
 
@@ -97,8 +96,7 @@ app.put('/api/confs', jsonParser, function(req, res) {
   } else {
     res.status(404).send(conf);
   }
-})
-
+})*/
 app.listen(3000, function() {
   console.log('Сервер ожидает подключения...');
 })

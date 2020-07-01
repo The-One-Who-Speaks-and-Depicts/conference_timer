@@ -100,13 +100,14 @@ window.onload = function() {
           type: 'GET',
           contentType: 'application/json',
           success: function(conf) {
+            console.log(conf[0]);
             var form = document.forms['confsForm']
-            form.elements['id'].value = conf.id;
-            form.elements['name'].value = conf.name;
-            form.elements['desc'].value = conf.desc;
-            form.elements['date'].value = conf.date;
-            form.elements['stat'].value = conf.stat;
-            form.elements['req_size'].value = conf.req_size;
+            form.elements['id'].value = conf[0].id;
+            form.elements['name'].value = conf[0].name;
+            form.elements['desc'].value = conf[0].desc;
+            form.elements['date'].value = conf[0].date;
+            form.elements['stat'].value = conf[0].stat;
+            form.elements['req_size'].value = conf[0].req_size;
           }
         })
       }
@@ -133,7 +134,7 @@ window.onload = function() {
       // Изменение конференции
       function EditConf(confId, confName, confDesc, confDate, confStat, confReq) {
         $.ajax({
-          url: 'api/confs',
+          url: 'api/confs/' + confId,
           contentType: 'application/json',
           method: 'PUT',
           data: JSON.stringify({
@@ -149,6 +150,7 @@ window.onload = function() {
             $("tr[data-rowid='" + conf.id + "']").replaceWith(row(conf));
           }
         })
+        location.reload(true);
       }
 
       // сброс формы
