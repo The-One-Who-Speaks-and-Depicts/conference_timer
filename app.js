@@ -9,11 +9,19 @@ var jsonParser = bodyParser.json()
 
 app.use(express.static(__dirname + '/public'))
 // получение списка данных
+/*
 app.get('/api/confs', function(req, res) {
   var content = fs.readFileSync('confs.json', 'utf8')
   var confs = JSON.parse(content)
   res.send(confs)
-})
+})*/
+app.get('/api/confs', (request, response) => {
+    pool.query('SELECT * FROM confs', (error, result) => {
+        if (error) throw error;
+ 
+        response.send(result);
+    });
+});
 // получение одного пользователя по id
 app.get('/api/confs/:id', function(req, res) {
   var id = req.params.id; // получаем id
