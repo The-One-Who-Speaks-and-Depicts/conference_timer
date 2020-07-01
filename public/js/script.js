@@ -207,4 +207,5 @@ window.onload = function() {
 
       // загрузка конференций
       GetConfs()
+      
 };
