@@ -1,5 +1,7 @@
 # Conference_timer
 ## Таймер обратного отсчёта для конференций
+![screenshot of working window](https://raw.githubusercontent.com/The-One-Who-Speaks-and-Depicts/conference_timer/master/screen.png)
+
 <hr>
 
 ### Как использовать
